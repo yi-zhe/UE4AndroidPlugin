@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <proguardAdditions>
+    <insert>
+    </insert>
+  </proguardAdditions>
+
+  <gameActivityImportAdditions>
+    <insert>
+      import android.net.ConnectivityManager;
+      import android.net.NetworkInfo;
+      import com.google.android.gms.common.ConnectionResult;
+      import android.telephony.TelephonyManager;
+      import android.net.wifi.WifiManager;
+      import com.learn.lib.AndroidLib;
+    </insert>
+  </gameActivityImportAdditions>
+
+  <!-- onCreate中加入初始化代码 -->
+  <gameActivityOnCreateAdditions>
+    <insert>
+      AndroidLib.init(AndroidLib.ANDROID_LIB);
+    </insert>
+  </gameActivityOnCreateAdditions>
+
+  <!-- onDestroy中加入销毁代码 -->
+  <gameActivityOnDestroyAdditions>
+    <insert>
+      AndroidLib.destroy();
+    </insert>
+  </gameActivityOnDestroyAdditions>
+
+  <gameActivityClassAdditions>
+    <insert>
+    public boolean AndroidThunkJava_CheckInternetConnection() {
+        ConnectivityManager connectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null) {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null) {
+                for (int i = 0; i &lt; info.length; i++) {
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    </insert>
+  </gameActivityClassAdditions>
+</root>

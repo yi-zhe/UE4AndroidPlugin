@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+  <init>
+    <log text="Android Lib Init"/>
+  </init>
+
+  <prebuildCopies>
+    <log text="Copying AndroidLib directory to staging before build"/>
+    <copyDir src="$S(PluginDir)/Android/AndroidLib"
+        dst="$S(BuildDir)/JavaLibs/AndroidLib" />
+  </prebuildCopies>
+</root>
